@@ -65,7 +65,7 @@ function handleSubmit(e) {
         // Tampilkan pesan sebentar lalu pindah ke Portal.html
         setTimeout(() => {
             // Jika mau buka di tab baru: window.open('Portal.html', '_blank');
-            window.location.href = "Portal.html";
+            window.location.href = ".Pages/Portal.html";
         }, 300); // 300 ms delay supaya pengguna sempat lihat pesan. Ganti/dihapus sesuai kebutuhan.
         
     } else {
