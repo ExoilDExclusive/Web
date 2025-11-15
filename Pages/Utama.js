@@ -15,7 +15,7 @@
   const body = document.body;
 
   // ------------------ config (ambil dari data-attributes di <body>) ------------------
-  const logoVideoSrc = (body.dataset.logoVideo && body.dataset.logoVideo.trim()) || 'Asset/Loop.mp4';
+  const logoVideoSrc = (body.dataset.logoVideo && body.dataset.logoVideo.trim()) || '../Asset/Loop.mp4';
   const slides = [
     (body.dataset.slide1 && body.dataset.slide1.trim()) || '',
     (body.dataset.slide2 && body.dataset.slide2.trim()) || '',
