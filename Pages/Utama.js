@@ -233,24 +233,24 @@
   // Configure guru data here — gunakan path assets/*.svg agar konsisten
   const GURU_DATA = {
     presiden: {
-      img: 'assets/Presiden.svg',
+      img: '../Asset/Presiden.svg',
       name: 'Prof.Dr.H.Harysma Dwi Subagja S.M.K',
       desc: 'Beliau adalah guru produktif yang berpengalaman di bidang teknologi dan pengembangan kejuruan.'
     },
     wapres: {
-      img: 'assets/Wapres.svg',
+      img: '../Asset/Wapres.svg',
       name: 'Dr.H.Muhammad Azhril Pratama S.H.',
       desc: 'Beliau adalah guru normatif/adaptif yang selalu memberikan semangat dan motivasi kepada siswa.'
     },
     akmal: {
-      img: 'assets/Akmal.svg', // <-- pastikan file ini ada (sesuaikan jika di tempat lain)
+      img: '../Asset/Akmal.svg', // <-- pastikan file ini ada (sesuaikan jika di tempat lain)
       name: 'Akmal (Nama Lengkap)',
       desc: 'Gak tau guru gadungan'
     }
   };
 
   // fallback image jika tidak ditemukan
-  const GURU_FALLBACK = 'assets/Presiden.svg';
+  const GURU_FALLBACK = '../Asset/Null.png';
 
   function openGuru(id) {
     if (!guruModal) return;
