@@ -155,114 +155,181 @@
 </div>
 
 <script>
-  (function() {
-    const overlay = document.getElementById("overlay");
-    const playerVideo = document.getElementById("playerVideo");
-    
-    let pendingTargetURL = null;
-    let pendingTargetTab = "_self";
-    let popupRef = null; // referensi ke window baru jika dibuka saat klik
-    
-    function openOverlay(videoSrc) {
-      const srcEl = playerVideo.querySelector("source");
-      if (srcEl.getAttribute("src") !== videoSrc) {
-        srcEl.setAttribute("src", videoSrc);
-        playerVideo.load();
-      }
-      playerVideo.muted = true;
-      playerVideo.play().catch(() => {});
-      overlay.classList.add("show");
-      document.body.style.overflow = "hidden";
-    }
-    
-    function closeOverlay() {
-      playerVideo.pause();
-      const srcEl = playerVideo.querySelector("source");
-      srcEl.setAttribute("src", "");
+(function(){
+  const overlay = document.getElementById("overlay");
+  const playerVideo = document.getElementById("playerVideo");
+
+  // create a lightweight tap-to-play hint (only shown when autoplay fails)
+  const hint = document.createElement('div');
+  hint.style.position = 'fixed';
+  hint.style.left = '50%';
+  hint.style.top = '50%';
+  hint.style.transform = 'translate(-50%, -50%)';
+  hint.style.padding = '10px 16px';
+  hint.style.background = 'rgba(0,0,0,0.6)';
+  hint.style.color = '#fff';
+  hint.style.borderRadius = '10px';
+  hint.style.fontSize = '14px';
+  hint.style.fontWeight = '600';
+  hint.style.backdropFilter = 'blur(4px)';
+  hint.style.display = 'none';
+  hint.style.zIndex = '10001';
+  hint.textContent = 'Ketuk untuk memulai video';
+  document.body.appendChild(hint);
+
+  let pendingTargetURL = null;
+  let pendingTargetTab = '_self';
+  let popupRef = null;
+
+  function log(...args){ console.log('[VIDEO DEBUG]', ...args); }
+
+  function openOverlay(videoSrc){
+    const srcEl = playerVideo.querySelector('source');
+    if (srcEl.getAttribute('src') !== videoSrc) {
+      srcEl.setAttribute('src', videoSrc);
       playerVideo.load();
-      overlay.classList.remove("show");
-      document.body.style.overflow = "";
-      // jika ada popup terbuka (ref) dan masih kosong, tutup saja
-      if (popupRef && !popupRef.closed && popupRef.location.href === "about:blank") {
-        try { popupRef.close(); } catch (e) {}
-      }
-      popupRef = null;
     }
-    
-    document.querySelectorAll(".card").forEach(card => {
-      card.addEventListener("click", function(e) {
-        e.preventDefault();
-        
-        pendingTargetURL = this.href;
-        pendingTargetTab = this.dataset.target || "_self";
-        const videoSource = this.dataset.video || "P.mp4";
-        
-        // Jika target = _blank, buka jendela kosong SEKARANG (user gesture) untuk menghindari popup block.
-        // Kita simpan referensinya dan navigasikan ke URL saat video selesai.
-        if (pendingTargetTab === "_blank") {
-          try {
-            popupRef = window.open('about:blank', '_blank');
-          } catch (err) {
-            popupRef = null;
-          }
-        } else {
+
+    // Ensure muted so autoplay has best chance
+    playerVideo.muted = true;
+
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+
+    // Try to play and catch errors
+    const p = playerVideo.play();
+    if (p !== undefined) {
+      p.then(()=>{
+        log('Autoplay berhasil.');
+        hint.style.display = 'none';
+      }).catch(err=>{
+        // autoplay failed — show hint and log
+        log('Autoplay gagal (promise rejected):', err);
+        hint.style.display = 'block';
+      });
+    }
+  }
+
+  function closeOverlay(){
+    try { playerVideo.pause(); } catch(e){}
+    const srcEl = playerVideo.querySelector('source');
+    srcEl.setAttribute('src','');
+    try { playerVideo.load(); } catch(e){}
+    overlay.classList.remove('show');
+    document.body.style.overflow = '';
+
+    // close any blank popup ref if unused
+    if (popupRef && !popupRef.closed && popupRef.location && popupRef.location.href === 'about:blank') {
+      try { popupRef.close(); } catch(e){}
+    }
+    popupRef = null;
+    hint.style.display = 'none';
+  }
+
+  // if user taps hint, try to play again (user gesture)
+  hint.addEventListener('click', function(){
+    hint.style.display = 'none';
+    playerVideo.muted = false; // optionally unmute on user gesture — change if you want muted
+    const p = playerVideo.play();
+    if (p) {
+      p.then(()=> log('Play setelah tap sukses') ).catch(e=> log('Play setelah tap masih gagal', e));
+    }
+  });
+
+  // Log video element errors
+  playerVideo.addEventListener('error', function(e){
+    const err = playerVideo.error;
+    log('MediaError event:', err);
+    // human readable
+    if(err){
+      const codes = {
+        1:'MEDIA_ERR_ABORTED',
+        2:'MEDIA_ERR_NETWORK',
+        3:'MEDIA_ERR_DECODE',
+        4:'MEDIA_ERR_SRC_NOT_SUPPORTED'
+      };
+      log('code:', err.code, codes[err.code] || '');
+    }
+  });
+
+  // Also log loadedmetadata to confirm source loaded & dimensions
+  playerVideo.addEventListener('loadedmetadata', function(){
+    log('loadedmetadata — duration:', playerVideo.duration, 'videoWidth:', playerVideo.videoWidth, 'videoHeight:', playerVideo.videoHeight);
+  });
+
+  // click handler for cards (same logic as sebelumnya, but with debug logs)
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+
+      pendingTargetURL = this.href;
+      pendingTargetTab = this.dataset.target || '_self';
+      const videoSource = this.dataset.video || 'PA.mp4';
+
+      log('Card clicked — targetURL:', pendingTargetURL, 'video:', videoSource, 'targetTab:', pendingTargetTab);
+
+      // open blank popup immediately if target is _blank to avoid popup blocker
+      if(pendingTargetTab === '_blank'){
+        try {
+          popupRef = window.open('about:blank', '_blank');
+          log('Blank popup opened (to avoid block).');
+        } catch(err){
           popupRef = null;
+          log('Gagal membuka blank popup:', err);
         }
-        
-        openOverlay(videoSource);
-        
-        // pas video selesai => navigasi
-        playerVideo.onended = function() {
-          if (!pendingTargetURL) {
-            closeOverlay();
-            return;
-          }
-          
-          if (pendingTargetTab === "_blank") {
-            // jika popupRef valid -> arahkan ke URL, jika tidak -> fallback window.open
-            if (popupRef && !popupRef.closed) {
-              try {
-                popupRef.location.href = pendingTargetURL;
-              } catch (e) {
-                // cross-origin / other error -> fallback
-                window.open(pendingTargetURL, "_blank");
-              }
-            } else {
-              window.open(pendingTargetURL, "_blank");
+      } else {
+        popupRef = null;
+      }
+
+      openOverlay(videoSource);
+
+      playerVideo.onended = function(){
+        log('video ended — navigating to', pendingTargetURL);
+        if (!pendingTargetURL) { closeOverlay(); return; }
+
+        if (pendingTargetTab === '_blank') {
+          if (popupRef && !popupRef.closed) {
+            try {
+              popupRef.location.href = pendingTargetURL;
+              log('popupRef navigated to target');
+            } catch (e) {
+              log('popupRef navigation failed, fallback window.open', e);
+              window.open(pendingTargetURL, '_blank');
             }
-            closeOverlay();
           } else {
-            // same-tab nav
-            window.location.href = pendingTargetURL;
+            window.open(pendingTargetURL, '_blank');
           }
-        };
-      });
-      
-      // keyboard accesibility
-      if (!card.hasAttribute('tabindex')) card.setAttribute("tabindex", "0");
-      card.addEventListener("keydown", e => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          card.click();
+          closeOverlay();
+        } else {
+          window.location.href = pendingTargetURL;
         }
-      });
+      };
     });
-    
-    // close overlay ketika klik luar
-    overlay.addEventListener("click", e => {
-      if (e.target === overlay) {
-        closeOverlay();
+
+    if(!card.hasAttribute('tabindex')) card.setAttribute('tabindex','0');
+    card.addEventListener('keydown', e=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        card.click();
       }
     });
-    
-    // close ESC
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && overlay.classList.contains("show")) {
-        closeOverlay();
-      }
-    });
-    
-  })();
+  });
+
+  overlay.addEventListener('click', function(ev){
+    if(ev.target === overlay){
+      closeOverlay();
+    }
+  });
+
+  document.addEventListener('keydown', function(ev){
+    if(ev.key === 'Escape' && overlay.classList.contains('show')) closeOverlay();
+  });
+
+  // Helpful quick checks on load: log current location & video element support
+  log('Page loaded at', location.href);
+  log('Video supported types:',
+    { mp4: playerVideo.canPlayType('video/mp4'), webm: playerVideo.canPlayType('video/webm') });
+})();
 </script>
 
 </body>
