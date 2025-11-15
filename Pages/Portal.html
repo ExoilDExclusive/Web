@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portal Link</title>
+
+  <style>
+    :root{
+      --bg:#0d0d0d;
+      --fg:#ffffff;
+      --muted:#cfcfcf;
+      --card:#151515;
+      --radius:14px;
+      --shadow:0 8px 24px rgba(0,0,0,0.45);
+      font-family: Inter, sans-serif;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+    }
+
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:480px;
+      text-align:center;
+    }
+
+    h1{
+      font-size:22px;
+      margin-bottom:18px;
+    }
+
+    .links{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .card{
+      background:var(--card);
+      padding:20px 26px;
+      border-radius:var(--radius);
+      text-decoration:none;
+      color:var(--fg);
+      font-size:16px;
+      font-weight:600;
+      border:1px solid #1f1f1f;
+      box-shadow:var(--shadow);
+      transition:.25s;
+      display:block;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      background:#1a1a1a;
+    }
+
+    .desc{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    /* OVERLAY VIDEO (POL0S, TANPA TOMBOL, TANPA TEXT) */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.82);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      pointer-events:none;
+      transition:.28s;
+      z-index:9999;
+    }
+    .overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .player{
+      width:95%;
+      max-width:1100px;
+      border-radius:12px;
+      overflow:hidden;
+      background:#000;
+      box-shadow:0 30px 80px rgba(0,0,0,0.6);
+      transform:translateY(16px) scale(.97);
+      opacity:0;
+      transition:.28s;
+    }
+    .overlay.show .player{
+      transform:none;
+      opacity:1;
+    }
+
+    .video-box{
+      width:100%;
+      position:relative;
+      padding-top:56.25%; /* 16:9 */
+      background:#000;
+    }
+
+    .video-box video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      background:#000;
+      display:block;
+      object-fit:contain;   /* VIDEO TIDAK TER-CROP */
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>LINK VIRAL 2025 🔥</h1>
+
+  <div class="links">
+    <a class="card" href="WebTugas.html" data-target="_self" data-video="PORTA.mp4">
+      YUDA X HARYS
+      <div class="desc">Link Web Tugas</div>
+    </a>
+
+    <a class="card" href="Portofolio.html" data-target="_self" data-video="PORTO.mp4">
+      Bokep Azhril ambatukam new
+      <div class="desc">Link Portofolio</div>
+    </a>
+  </div>
+</div>
+
+<!-- OVERLAY VIDEO -->
+<div id="overlay" class="overlay">
+  <div class="player">
+    <div class="video-box">
+      <video id="playerVideo" autoplay playsinline muted preload="metadata">
+        <source src="PA.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const overlay = document.getElementById("overlay");
+    const playerVideo = document.getElementById("playerVideo");
+    
+    let pendingTargetURL = null;
+    let pendingTargetTab = "_self";
+    let popupRef = null; // referensi ke window baru jika dibuka saat klik
+    
+    function openOverlay(videoSrc) {
+      const srcEl = playerVideo.querySelector("source");
+      if (srcEl.getAttribute("src") !== videoSrc) {
+        srcEl.setAttribute("src", videoSrc);
+        playerVideo.load();
+      }
+      playerVideo.muted = true;
+      playerVideo.play().catch(() => {});
+      overlay.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    
+    function closeOverlay() {
+      playerVideo.pause();
+      const srcEl = playerVideo.querySelector("source");
+      srcEl.setAttribute("src", "");
+      playerVideo.load();
+      overlay.classList.remove("show");
+      document.body.style.overflow = "";
+      // jika ada popup terbuka (ref) dan masih kosong, tutup saja
+      if (popupRef && !popupRef.closed && popupRef.location.href === "about:blank") {
+        try { popupRef.close(); } catch (e) {}
+      }
+      popupRef = null;
+    }
+    
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", function(e) {
+        e.preventDefault();
+        
+        pendingTargetURL = this.href;
+        pendingTargetTab = this.dataset.target || "_self";
+        const videoSource = this.dataset.video || "PA.mp4";
+        
+        // Jika target = _blank, buka jendela kosong SEKARANG (user gesture) untuk menghindari popup block.
+        // Kita simpan referensinya dan navigasikan ke URL saat video selesai.
+        if (pendingTargetTab === "_blank") {
+          try {
+            popupRef = window.open('about:blank', '_blank');
+          } catch (err) {
+            popupRef = null;
+          }
+        } else {
+          popupRef = null;
+        }
+        
+        openOverlay(videoSource);
+        
+        // pas video selesai => navigasi
+        playerVideo.onended = function() {
+          if (!pendingTargetURL) {
+            closeOverlay();
+            return;
+          }
+          
+          if (pendingTargetTab === "_blank") {
+            // jika popupRef valid -> arahkan ke URL, jika tidak -> fallback window.open
+            if (popupRef && !popupRef.closed) {
+              try {
+                popupRef.location.href = pendingTargetURL;
+              } catch (e) {
+                // cross-origin / other error -> fallback
+                window.open(pendingTargetURL, "_blank");
+              }
+            } else {
+              window.open(pendingTargetURL, "_blank");
+            }
+            closeOverlay();
+          } else {
+            // same-tab nav
+            window.location.href = pendingTargetURL;
+          }
+        };
+      });
+      
+      // keyboard accesibility
+      if (!card.hasAttribute('tabindex')) card.setAttribute("tabindex", "0");
+      card.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+    
+    // close overlay ketika klik luar
+    overlay.addEventListener("click", e => {
+      if (e.target === overlay) {
+        closeOverlay();
+      }
+    });
+    
+    // close ESC
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && overlay.classList.contains("show")) {
+        closeOverlay();
+      }
+    });
+    
+  })();
+</script>
+
+</body>
+</html>
