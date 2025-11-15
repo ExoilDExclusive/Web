@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tugas pak Bagja</title>
+  <link rel="stylesheet" href="Utama.css">
+</head>
+<body
+  data-logo-video="Asset/Loop.mp4"
+  data-slide1="Asset/slide1.svg"
+  data-slide2="Asset/slide2.svg"
+  data-slide3="Asset/slide3.svg">
+
+  <nav class="navbar">
+    <div class="brand">
+      <div class="logo-wrap" id="logoWrap" title="Klik untuk unmute/mute logo">
+        <img id="logoImg" src="" alt="logo" style="display:none" />
+        <video id="logoVideo" src="" muted loop playsinline style="display:none"></video>
+      </div>
+      <div>
+        <h1> SMK CIBENING </h1>
+        <p class="muted">ExoilD Exclusive</p>
+      </div>
+    </div>
+
+    <div class="navlinks">
+      <a href="#home" data-link="#home">HOME</a>
+      <a href="#artikel" data-link="#artikel">Artikel</a>
+      <a href="#guru" data-link="#guru">Guru</a>
+
+      <div class="dropdown">
+        <div class="dropdown-toggle" id="kompetensiToggle">Kompetensi keahlian ▾</div>
+        <div class="dropdown-menu" id="kompetensiMenu">
+          <a href="#tkj" data-link="#tkj">TKJ</a>
+          <a href="#acp" data-link="#acp">ACP</a>
+          <a href="#tsm" data-link="#tsm">TSM</a>
+          <a href="#all" data-link="#all">ALL</a>
+        </div>
+      </div>
+
+      <a href="#ppdb" data-link="#ppdb">PPDB</a>
+      <a href="#microtic" data-link="#microtic">Mikrotik Academy</a>
+      <a href="#contact" data-link="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="carousel" id="carousel">
+        <div class="slide" data-index="0">
+          <img src="" alt="Slide 1">
+          <div class="caption"><h2>Lapangan</h2><p>Lapangan SMK CIBENING adalah yang terbaik setara Bernabeu</p></div>
+        </div>
+        <div class="slide" data-index="1">
+          <img src="" alt="Slide 2">
+          <div class="caption"><h2>Lab AKL x TKJ</h2><p>Lab yang Computernya setara NASA</p></div>
+        </div>
+        <div class="slide" data-index="2">
+          <img src="" alt="Slide 3">
+          <div class="caption"><h2>Kantin</h2><p>Orang orang yang sangat konsisten dengan menunya yang sama sejak 1945</p></div>
+        </div>
+
+        <div class="carousel-controls">
+          <div class="dots" id="dots"></div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn" id="prevBtn">◀</button>
+            <button class="btn" id="nextBtn">▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos" style="padding:28px 20px;max-width:1100px;margin:24px auto 60px;color:var(--muted)">
+      <h2 style="color:var(--accent);margin-bottom:12px">Perkenalan Sekolah</h2>
+
+      <div style="max-width:900px;margin:auto;border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.5)">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/77yFKOXRwTk?si=BzL0idVzvMOcP4JU" 
+          title="YouTube video"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    
+
+    <section id="tentang-kami" style="padding:28px 20px;max-width:1100px;margin:12px auto 40px;color:var(--muted);background:transparent;">
+      <div style="background:var(--panel);padding:20px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.45)">
+        <h2 style="color:var(--accent);margin-top:0">TENTANG KAMI</h2>
+        <p style="line-height:1.6;color:var(--muted);margin-bottom:16px;">
+          SMK Cibening Kecamatan Cibingbin Kabupaten Kuningan merupakan sekolah dibawah Yayasan Umar Syahir Cibingbin yang didirikan untuk memenuhi kebutuhan masyarakat Kecamatan Cibingbin, Kecamatan Cibeureum Kabupaten Kuningan, dan Kecamatan Banjarharjo Kabupaten Brebes dalam upaya peningkatan kualitas Pendidikan di bidang Teknologi Informasi dan Komunikasi juga bidang lainnya. Keberadaan SMK sangat dibutuhkan karena belum ada di wilayah tersebut di atas, sehingga pada tahun 2016 SMK Cibening berdiri dan mulai menerima siswa baru. Pada tahun pelajaran 2019/2020 SMK Cibening kembali membuka penerimaan peserta didik baru.
+        </p>
+
+        <h3 style="color:var(--accent);margin-bottom:8px">VISI DAN MISI</h3>
+
+        <h4 style="color:var(--accent);margin:10px 0 6px">Visi SMK Cibening</h4>
+        <p style="color:var(--muted);margin-top:0;line-height:1.6">
+          Mewujudkan insan yang religius, terampil, berkarakter, menguasai ilmu dan teknologi, serta unggul dalam bekerja.
+        </p>
+
+        <h4 style="color:var(--accent);margin:12px 0 6px">Misi SMK Cibening</h4>
+        <ol style="color:var(--muted);line-height:1.6;margin-left:20px">
+          <li>Menumbuhkan kegiatan bernuansa agamis, berbudaya dan berbudi pekerti luhur.</li>
+          <li>Meningkatkan disiplin dan menumbuhkan karakter terhadap norma yang berlaku.</li>
+          <li>Mewujudkan pembelajaran yang efektif, kreatif dan inovatif.</li>
+          <li>Mewujudkan SMK yang berwawasan global dan berdaya saing dalam IPTEK.</li>
+          <li>Mewujudkan lulusan SMK yang bermutu serta unggul dalam bekerja.</li>
+          <li>Menjalin kerjasama dengan dunia usaha dan dunia industri (DuDi) serta masyarakat.</li>
+          <li>Menumbuhkan jiwa kewirausahaan bagi warga sekolah.</li>
+          <li>Meningkatkan potensi, kemampuan serta komitmen tenaga pendidik dan kependidikan dalam bekerja.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="artikel" class="artikel-section">
+      <h2 class="section-title">ARTIKEL</h2>
+
+      <div class="artikel-grid">
+
+        <div class="artikel-card">
+          <div class="artikel-icon">
+            <img src="assets/I1.svg" alt="ikontek">
+          </div>
+          <h3>Teknologi</h3>
+          <p>
+            Teknologi adalah suatu sistem yang dirancang oleh manusia dengan tujuan untuk mempermudah 
+            dan menghasilkan efisiensi tinggi dalam berbagai bidang kehidupan.
+          </p>
+        </div>
+
+        <div class="artikel-card">
+          <div class="artikel-icon">
+            <img src="assets/I2.svg" alt="ikonk">
+          </div>
+          <h3>Keuangan</h3>
+          <p>
+            Keuangan negara adalah segala hak dan kewajiban negara yang dapat dinilai dengan uang, serta 
+            segala sesuatu yang dapat dijadikan milik negara.
+          </p>
+        </div>
+
+        <div class="artikel-card">
+          <div class="artikel-icon">
+            <img src="assets/I3.svg" alt="ikonworld">
+          </div>
+          <h3>Berita Internasional</h3>
+          <p>
+            Berbagai isu global yang sedang berkembang di dunia internasional dan berpengaruh pada berbagai sektor.
+          </p>
+        </div>
+
+        <div class="artikel-card">
+          <div class="artikel-icon">
+            <img src="assets/I4.svg" alt="ikonschool">
+          </div>
+          <h3>Kegiatan Sekolah</h3>
+          <p>
+            Beragam kegiatan intrakurikuler dan ekstrakurikuler yang meningkatkan kreativitas dan kemampuan siswa.
+          </p>
+        </div>
+
+        <div class="artikel-card">
+          <div class="artikel-icon">
+            <img src="assets/I5.svg" alt="ikonrule">
+          </div>
+          <h3>Peraturan Sekolah</h3>
+          <p>
+            Peraturan-peraturan sekolah yang bertujuan membentuk kedisiplinan serta membangun lingkungan belajar kondusif.
+          </p>
+        </div>
+
+        <div class="artikel-card">
+          <div class="artikel-icon">
+            <img src="assets/I6.svg" alt="ikoncal">
+          </div>
+          <h3>Kalender Pendidikan</h3>
+          <p>
+            Informasi lengkap mengenai jadwal kegiatan akademik, libur, dan agenda sekolah dalam satu tahun pelajaran.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="guru" class="guru-section">
+      <h2 class="section-title">DAFTAR GURU</h2>
+
+      <div class="guru-grid">
+
+        <!-- Guru 1 -->
+        <div class="guru-card" onclick="openGuru('presiden')">
+          <img src="Asset/Presiden.svg" alt="Guru 1">
+          <h3>Prof.Dr.H.Harysma Dwi Subagja S.M.K</h3>
+          <p>Guru Besar</p>
+        </div>
+
+        <!-- Guru 2 -->
+        <div class="guru-card" onclick="openGuru('wapres')">
+          <img src="Asset/Wapres.svg" alt="Guru 2">
+          <h3>Dr.H.Muhammad Azhril Pratama S.H.</h3>
+          <p>Guru Kecil</p>
+        </div>
+      
+        <div class="guru-card" onclick="openGuru('press')">
+          <img src="Asset/Akmal.svg" alt="Guru 3">
+          <h3>Ir.H.Akmal Maulana J.M.K</h3>
+          <p>Guru Guruan</p>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- Guru Modal -->
+    <div id="guruModal" class="guru-modal">
+      <div class="guru-modal-content">
+        <span class="close-btn" onclick="closeGuru()">&times;</span>
+
+        <img id="modalImg" src="" alt="">
+        <h3 id="modalName"></h3>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+
+
+
+<section id="ppdb" class="ppdb-section">
+  <h2 class="ppdb-title">PPDB</h2>
+  
+  <div class="ppdb-image-wrap">
+    <img src="Asset/PPDB.svg" alt="PPDB" class="ppdb-image">
+  </div>
+  
+  <a href="https://forms.gle/pYzdsoqkNEarur276" target="_blank" class="ppdb-btn">
+    Klik Disini
+  </a>
+</section>
+
+
+
+
+    <section id="microtic" class="mikrotik-section">
+      <h2 class="mikrotik-title">Mikrotik Academy</h2>
+
+      <div class="mikrotik-image-wrap">
+        <img src="Asset/MA.png" alt="Mikrotik Academy" class="mikrotik-image">
+      </div>
+
+      <div class="mikrotik-content">
+        <p>
+          Mikrotik merupakan perangkat lunak, sekaligus sistem operasi yang dapat digunakan untuk menjadikan komputer dapat berfungsi
+          sebagai network (jaringan), pengendali, atau pengatur lalu lintas antar jaringan komputer. Mikrotik juga menggunakan sistem
+          operasi berbasis Linux dan menjadi dasar network router. Sistem operasi (OS) ini sangat cocok untuk membangun administrasi
+          jaringan komputer yang berskala kecil hingga besar.
+        </p>
+
+        <p>
+          Namun, hingga saat ini masih banyak orang yang salah memahami pengertian dari mikrotik dan router. Jika mikrotik adalah
+          sebuah sistem operasi yang termasuk dalam golongan open source, maka router merupakan perangkat keras yang berfungsi sebagai
+          penghubung antara dua jaringan atau lebih. Jadi, perbedaan yang paling mendasar adalah mikrotik sebagai software dan router
+          berperan menjadi hardware.
+        </p>
+
+        <h3 class="mikrotik-subtitle">Kurikulum Mikrotik Academy SMK Cibening Kuningan</h3>
+
+        <h4 class="mikrotik-topic">MikroTik RouterOS/RouterBoard Introduction</h4>
+        <ol>
+          <li>Pengenalan MikroTik</li>
+          <li>Manajemen Router MikroTik</li>
+          <li>Backup and Basic Configuration</li>
+          <li>Reinstall RouterOS</li>
+          <li>Troubleshooting Router MikroTik</li>
+          <li>Quick Set</li>
+        </ol>
+
+        <h4 class="mikrotik-topic">LAN Management and Routing</h4>
+        <ol>
+          <li>Bridge</li>
+          <li>Lokal Manajemen</li>
+          <li>Routing</li>
+        </ol>
+
+        <h4 class="mikrotik-topic">WIRELESS</h4>
+        <ol>
+          <li>Wireless Network</li>
+        </ol>
+
+        <h4 class="mikrotik-topic">QOS</h4>
+        <ol>
+          <li>Bandwidth Management</li>
+        </ol>
+
+        <h4 class="mikrotik-topic">TUNNEL</h4>
+        <ol>
+          <li>Tunnel di RouterBoard/RouterOS</li>
+        </ol>
+
+      </div>
+    </section>
+
+    <section id="ekskul" class="ekskul-section">
+      <h2 class="ekskul-title">Ekstrakurikuler</h2>
+
+      <div class="ekskul-content">
+
+        <h3>Paskibraka</h3>
+        <p>
+          Paskibraka melatih kedisiplinan, kepemimpinan, baris-berbaris, serta mempersiapkan anggota untuk mengibarkan bendera pada upacara penting. Kegiatan ini membentuk mental kuat dan fisik yang prima.
+        </p>
+
+        <h3>Pramuka</h3>
+        <p>
+          Pramuka mengajarkan kemandirian, kerja sama, kepemimpinan, kreativitas, serta kecakapan hidup melalui kegiatan berkemah, tali-temali, pertolongan pertama, dan berbagai penjelajahan.
+        </p>
+
+        <h3>PMR (Palang Merah Remaja)</h3>
+        <p>
+          PMR fokus pada keterampilan pertolongan pertama, kesehatan remaja, dan kegiatan sosial kemanusiaan. Anggota dilatih untuk siap membantu penanganan dasar saat keadaan darurat di sekolah maupun masyarakat.
+        </p>
+
+        <h3>OSIS</h3>
+        <p>
+          OSIS adalah organisasi resmi siswa yang bertugas mengembangkan kreativitas, kepemimpinan, dan kegiatan sekolah. OSIS mengelola program seperti class meeting, event seni, bakti sosial, dan kegiatan besar lainnya.
+        </p>
+
+        <h3>Voli</h3>
+        <p>
+          Ekstrakurikuler bola voli melatih koordinasi tubuh, kecepatan, kerja sama tim, dan strategi permainan. Siswa diajarkan teknik dasar seperti passing, servis, smash, dan blocking.
+        </p>
+
+        <h3>Futsal</h3>
+        <p>
+          Futsal memberi latihan fisik, kelincahan, kerja sama tim, dan taktik permainan cepat. Siswa mempelajari teknik dribble, passing, shooting, hingga strategi pertandingan.
+        </p>
+
+        <h3>IRMA (Remaja Masjid)</h3>
+        <p>
+          IRMA berfokus pada kegiatan keagamaan seperti kajian, tilawah, kegiatan kerohanian, dan pembinaan akhlak. Organisasi ini membantu membentuk karakter religius serta memperkuat nilai-nilai spiritual siswa.
+        </p>
+
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <h2 class="contact-title">CONTACT</h2>
+
+      <div class="contact-center">
+        <div class="contact-buttons">
+
+          <a href="https://maps.app.goo.gl/foHRDEguBHq8EiKTA" target="_blank" class="contact-btn gmail-btn">
+            📍 Google Maps
+          </a>
+
+          <a href="mailto:surat.smkcibening@gmail.com" class="contact-btn gold-btn">
+            ✉️ Surat Email
+          </a>
+
+          <a href="https://wa.me/6285700131985" target="_blank" class="contact-btn wa-btn">
+            💬 WhatsApp
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col contact-col">
+        <h3>Kontak Kami</h3>
+        <p class="school-name">SMK CIBENING<br>Kuningan</p>
+
+        <p><strong>Phone:</strong> <a href="tel:+6285700131985">+62 857-0013-1985</a></p>
+        <p><strong>Email:</strong> <a href="mailto:surat.smkcibening@gmail.com">surat.smkcibening@gmail.com</a></p>
+
+        <div class="socials">
+          <a class="social" href="#" aria-label="Twitter">T</a>
+          <a class="social" href="#" aria-label="Facebook">F</a>
+          <a class="social" href="#" aria-label="Instagram">I</a>
+          <a class="social" href="#" aria-label="LinkedIn">in</a>
+        </div>
+
+        <h4 class="footer-subtitle">Menerima Pesanan</h4>
+        <ul class="footer-list">
+          <li>Web Design</li>
+          <li>Web Development</li>
+          <li>Product Management</li>
+          <li>Graphic Design</li>
+        </ul>
+      </div>
+
+      <div class="footer-col links-col">
+        <h3>Kembali ke halaman utama</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#artikel">Artikel</a></li>
+          <li><a href="#guru">Guru</a></li>
+          <li><a href="#ppdb">PPDB</a></li>
+        </ul>
+
+        <h3 class="email-title">Email pengunjung</h3>
+        <p class="email-desc">Tinggalkan alamat email disini</p>
+
+        <form class="footer-form" action="mailto:surat.smkcibening@gmail.com" method="get" target="_blank">
+          <input type="email" name="email" placeholder="your@email.com" required>
+          <button type="submit" class="btn-send">Kirim</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Copyright SMK CIBENING. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="Utama.js"></script>
+</body>
+</html>
