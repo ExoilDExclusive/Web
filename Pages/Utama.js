@@ -235,15 +235,15 @@
     presiden: {
       img: '../Asset/Presiden.svg',
       name: 'Prof.Dr.H.Harysma Dwi Subagja S.M.K',
-      desc: 'Beliau adalah guru produktif yang berpengalaman di bidang teknologi dan pengembangan kejuruan.'
+      desc: 'Guru terbaik keren no hoak.'
     },
     wapres: {
       img: '../Asset/Wapres.svg',
       name: 'Dr.H.Muhammad Azhril Pratama S.H.',
-      desc: 'Beliau adalah guru normatif/adaptif yang selalu memberikan semangat dan motivasi kepada siswa.'
+      desc: 'Guru aneh jir ini.'
     },
     akmal: {
-      img: '../Asset/Akmal.svg', // <-- pastikan file ini ada (sesuaikan jika di tempat lain)
+      img: '../Asset/Akmal.jpg', // <-- pastikan file ini ada (sesuaikan jika di tempat lain)
       name: 'Akmal (Nama Lengkap)',
       desc: 'Gak tau guru gadungan'
     }
